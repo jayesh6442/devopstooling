@@ -8,13 +8,11 @@ pipeline {
                 echo 'Code checked out successfully'
             }
         }
-        stage('build'){
+        stage('builing docker image'){
             steps{
-                echo "building this thing"
-                sh "npm install"
-                sh "npm run build"
-                echo "build completed successfully"
-                
+                echo "building docker image"
+                sh "docker build -t test-deploy ."
+                echo "docker image built successfully"
             }
         }
     }
