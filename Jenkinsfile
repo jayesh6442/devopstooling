@@ -1,31 +1,20 @@
 pipeline {
-  agent {
-    kubernetes {
-      yaml """
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:latest
-    command:
-    - cat
-    tty: true
-"""
-    }
-  }
-
-  stages {
-    stage('Build Image') {
-      steps {
-        container('kaniko') {
-          sh '''
-          /kaniko/executor \
-            --context $PWD \
-            --dockerfile Dockerfile \
-          '''
+    agent any
+    stages {
+        stage('checkout') {
+            steps {
+                echo 'Checking out code...'
+                git branch: 'main', url: 'https://github.com/jayesh6442/devopstooling.git'
+                echo 'Code checked out successfully'
+            }
         }
-      }
+        stage('install node js'){
+            steps{
+                echo "installing node js"
+                sh "sudo apt-get update"
+                sh "sudo apt-get install -y nodejs"
+                
+            }
+        }
     }
-  }
 }
