@@ -1,9 +1,11 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('checkout') {
             steps {
-                sh 'echo Hello World'
+                echo 'Checking out code...'
+                git branch: 'main', url: 'https://github.com/jayesh6442/devopstooling.git'
+
             }
         }
     }
