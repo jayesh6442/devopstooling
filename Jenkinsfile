@@ -13,7 +13,14 @@ pipeline {
                 echo "installing node js"
                 sh "sudo apt-get update"
                 sh "sudo apt-get install -y nodejs"
-                
+                echo "node js installed"                
+            }
+        }
+        stage('install npm'){
+            steps{
+                echo "installing npm"
+                sh "sudo apt-get install -y npm"
+                echo "npm installed"                
             }
         }
     }
